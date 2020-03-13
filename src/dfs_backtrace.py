@@ -14,7 +14,7 @@ class DFS(GridMap):
         #
         # IMPLEMENT DEPTH FIRST SEARCH WITH BACKTRACE:
         # * save your search in self.map.data
-        # * use self.publish_visited() to publish the map every time when you search in new cell
+        # * use self.publish_visited() to publish the map every time you visited a new cell
         # * let 100 represent walls, 50 visited cells (useful for visualization)
         # * save the path to the goal fund by the algorithm to list of tuples: [(x_n, y_n), ..., (x_2, y_2), (x_1, y_1)]
         # * use self.publish_path(path) to publish the path at the very end

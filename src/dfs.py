@@ -14,7 +14,7 @@ class DFS(GridMap):
         #
         # IMPLEMENT DEPTH FIRST SEARCH:
         # * save your search in self.map.data
-        # * use self.publish_visited() to publish the map every time when you search in new cell
+        # * use self.publish_visited() to publish the map every time you visited a new cell
         # * let 100 represent walls, 50 visited cells (useful for visualization)
         # * start point is in self.start
         # * end point is in self.end

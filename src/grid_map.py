@@ -46,7 +46,6 @@ class GridMap(object):
         path_msg = Path()
         path_msg.header.frame_id = 'map'
         for p in path:
-            rp.logerr(p)
             pose = PoseStamped()
             pose.pose.position.x = self.map.info.resolution * p[1] + 0.05
             pose.pose.position.y = self.map.info.resolution * p[0] + 0.05

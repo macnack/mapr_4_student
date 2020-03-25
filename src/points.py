@@ -4,7 +4,7 @@ from visualization_msgs.msg import Marker
 
 
 class Point:
-    def __init__(self, x: float, y: float, name: str, color: tuple):
+    def __init__(self, x, y, name, color):
         self.pub = rp.Publisher('point_' + name, Marker, queue_size=10)
         self.marker = Marker()
 

@@ -6,7 +6,7 @@ from grid_map import GridMap
 class DFS(GridMap):
     def __init__(self):
         super(DFS, self).__init__()
-        ###  IF YOU NEED SOME ADDITIONAL FILEDS IN DFS OBJECT YOU CAN INITIALIZED TEHM HERE
+        ###  IF YOU NEED SOME ADDITIONAL FILEDS IN DFS OBJECT YOU CAN INITIALIZED THEM HERE
 
     def search(self):
         ### YOUR CODE GOES BELOW

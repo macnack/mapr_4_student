@@ -14,7 +14,7 @@ class GridMap(object):
         rp.Subscriber('map', OccupancyGrid, self.map_callback)
         rp.Subscriber('point_start', Marker, self.set_start)
         rp.Subscriber('point_end', Marker, self.set_end)
-        self.pub = rp.Publisher('bfs', OccupancyGrid, queue_size=10)
+        self.pub = rp.Publisher('map_visited', OccupancyGrid, queue_size=10)
         self.path_pub = rp.Publisher('path', Path, queue_size=10)
         while self.map is None or self.start is None or self.end is None:
             rp.sleep(0.1)
@@ -40,7 +40,7 @@ class GridMap(object):
 
     def publish_visited(self):
         self.pub.publish(self.map)
-        rp.sleep(0.1)
+        rp.sleep(0.5)
 
     def publish_path(self, path):
         path_msg = Path()

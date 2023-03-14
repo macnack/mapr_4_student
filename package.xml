@@ -11,7 +11,6 @@
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
   <depend>nav2_map_server</depend>
-  <depend>grid_map</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

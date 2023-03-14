@@ -1,15 +1,16 @@
-#!/usr/bin/env python
-import rospy as rp
-from grid_map import GridMap
+import rclpy
+import time
+from mapr_4_student.grid_map import GridMap
 
 
 class DFS(GridMap):
     def __init__(self):
         super(DFS, self).__init__()
-        ###  IF YOU NEED SOME ADDITIONAL FILEDS IN DFS OBJECT YOU CAN INITIALIZED TEHM HERE
+        ###  IF YOU NEED SOME ADDITIONAL FIELDS IN DFS OBJECT YOU CAN INITIALIZE THEM HERE
 
     def search(self):
         ### YOUR CODE GOES BELOW
+        #
         #
         #
         # IMPLEMENT DEPTH FIRST SEARCH WITH BACKTRACE:
@@ -23,9 +24,21 @@ class DFS(GridMap):
         #
         #
         ### YOUR CODE GOES ABOVE
-        pass  # DELETE THIS LINE IF THE CODE INSERTED
+        pass  # DELETE THIS LINE IF THE CODE IS INSERTED
 
+
+def main(args=None):
+    rclpy.init(args=args)
+    dfs = DFS()
+    while not dfs.data_received():
+        dfs.get_logger().info("Waiting for data...")
+        rclpy.spin_once(dfs)
+        time.sleep(0.5)
+
+    dfs.get_logger().info("Start graph searching!")
+    dfs.publish_visited()
+    time.sleep(1)
+    dfs.search()
 
 if __name__ == '__main__':
-    dfs = DFS()
-    dfs.search()
+    main()

@@ -1,6 +1,6 @@
-#!/usr/bin/env python
-import rospy as rp
-from grid_map import GridMap
+import rclpy
+import time
+from mapr_4_student.grid_map import GridMap
 
 
 class BFS(GridMap):
@@ -10,6 +10,7 @@ class BFS(GridMap):
 
     def search(self):
         ### YOUR CODE GOES BELOW
+        #
         #
         #
         # IMPLEMENT BREADTH FIRST SEARCH:
@@ -24,6 +25,18 @@ class BFS(GridMap):
         pass  # DELETE THIS LINE IF THE CODE INSERTED
 
 
-if __name__ == '__main__':
+def main(args=None):
+    rclpy.init(args=args)
     bfs = BFS()
+    while not bfs.data_received():
+        bfs.get_logger().info("Waiting for data...")
+        rclpy.spin_once(bfs)
+        time.sleep(0.5)
+
+    bfs.get_logger().info("Start graph searching!")
+    bfs.publish_visited()
+    time.sleep(1)
     bfs.search()
+
+if __name__ == '__main__':
+    main()

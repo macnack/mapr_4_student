@@ -41,8 +41,8 @@ class GridMap(Node):
         while self.map is None:
             time.sleep(0.5)
         mul = 1. / self.map.info.resolution
-        x = int(marker.pose.position.y * mul)
-        y = int(marker.pose.position.x * mul)
+        x = int(marker.pose.position.x * mul)
+        y = int(marker.pose.position.y * mul)
         return x, y
 
     def set_start(self, data):
@@ -62,8 +62,8 @@ class GridMap(Node):
         path_msg.header.frame_id = 'map'
         for p in path:
             pose = PoseStamped()
-            pose.pose.position.x = self.map.info.resolution * p[1] + 0.05
-            pose.pose.position.y = self.map.info.resolution * p[0] + 0.05
+            pose.pose.position.x = self.map.info.resolution * p[0] + 0.05
+            pose.pose.position.y = self.map.info.resolution * p[1] + 0.05
             pose.pose.position.z = 0.0
             pose.pose.orientation.x = 0.0
             pose.pose.orientation.y = 0.0

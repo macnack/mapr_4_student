@@ -49,9 +49,9 @@ Visualization Manager:
       Value: true
     - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map org
       Topic:
         Depth: 5
@@ -67,7 +67,7 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /map_updates
       Use Timestamp: false
-      Value: false
+      Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: true
       Name: Start
@@ -189,7 +189,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2.035142660140991
+      Distance: 2.0058367252349854
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -207,7 +207,7 @@ Visualization Manager:
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.703577995300293
+      Yaw: 4.713578224182129
     Saved: ~
 Window Geometry:
   Displays:
@@ -225,5 +225,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1200
-  X: 281
-  Y: 109
+  X: 368
+  Y: 57

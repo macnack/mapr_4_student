@@ -38,9 +38,4 @@ def generate_launch_description():
     ld.add_action(map_server)
     ld.add_action(lifecycle_manager)
 
-
     return ld
-
-# <launch>
-# <node name="map" pkg="map_server" type="map_server" args="$(find mapr_3_student)/maps/map.yaml" />
-# </launch>

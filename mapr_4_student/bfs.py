@@ -21,7 +21,7 @@ class BFS(GridMap):
         # * end point is in self.end
         #
         #
-        ### YOUR CODE GOES ABOVE
+        ### YOUR CODE GOES BELOW
         visited = set()
         q = queue.Queue()
         q.put(self.start)

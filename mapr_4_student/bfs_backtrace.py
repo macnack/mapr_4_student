@@ -26,7 +26,38 @@ class BFS(GridMap):
         #
         #
         ### YOUR CODE GOES ABOVE
-        pass  # DELETE THIS LINE IF THE CODE INSERTED
+        visited = set()
+        q = queue.Queue()
+        q.put(self.start)
+        parent = {}
+        for x in range(self.map.info.height):
+            for y in range(self.map.info.width):
+                parent[(x,y)] = None
+            
+        action = [ (0,-1), (-1,0), (0,1), (1,0)]
+        while not q.empty():
+            cur_n = q.get()
+            visited.add(cur_n)
+            self.map.data[cur_n[0] + cur_n[1] * self.map.info.width] = 50
+            self.get_logger().info(f"cur_n:={cur_n}")
+            if cur_n == self.end:
+                break
+
+            for u in action:
+                next_n = (cur_n[0]+u[0], cur_n[1]+u[1])
+                self.get_logger().info(f"next_n:={next_n}")
+                if next_n not in visited:
+                    if self.map.data[next_n[0] + next_n[1] * self.map.info.width] < 50:
+                        if next_n not in list(q.queue):
+                            parent[next_n] = cur_n
+                            q.put(next_n)
+            self.publish_visited()
+        
+        path = []
+        while cur_n != None:
+            path.append(cur_n)
+            cur_n = parent[cur_n]
+        self.publish_path(reversed(path))
 
 
 def main(args=None):

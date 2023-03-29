@@ -2,59 +2,63 @@ import rclpy
 import time
 from mapr_4_student.grid_map import GridMap
 import numpy as np
+import queue
 
 
 class BFS(GridMap):
     def __init__(self):
         super(BFS, self).__init__()
-        ###  IF YOU NEED SOME ADDITIONAL FILEDS IN BFS OBJECT YOU CAN INITIALIZED TEHM HERE
+        # IF YOU NEED SOME ADDITIONAL FILEDS IN BFS OBJECT YOU CAN INITIALIZED
+        # TEHM HERE
+
+    def down(self):
+        return (0, -1)
+
+    def up(self):
+        return (0, 1)
+
+    def left(self):
+        return (-1, 0)
+
+    def right(self):
+        return (1, 0)
+
+    def find_goal(self, node):
+        return node == self.end
+
+    def is_valid(self, pose):
+        return pose[1] < self.map.info.width and pose[0] < self.map.info.height and \
+            pose[0] > 0 and pose[1] > 0
 
     def search(self):
-        ### YOUR CODE GOES BELOW
-        #
-        #
-        #
-        #
-        # IMPLEMENT BREADTH FIRST SEARCH WITH BACKTRACE:
-        # * save your search in self.map.data
-        # * use self.publish_visited() to publish the map every time you visited a new cell
-        # * let 100 represent walls, 50 visited cells (useful for visualization)
-        # * save the path to the goal fund by the algorithm to list of tuples: [(x_n, y_n), ..., (x_2, y_2), (x_1, y_1)]
-        # * use self.publish_path(path) to publish the path at the very end
-        # * start point is in self.start
-        # * end point is in self.end
-        #
-        #
-        ### YOUR CODE GOES ABOVE
         visited = set()
-        q = queue.Queue()
-        q.put(self.start)
+        node_stack = queue.Queue()
+        node_stack.put(self.start)
         parent = {}
-        for x in range(self.map.info.height):
-            for y in range(self.map.info.width):
-                parent[(x,y)] = None
-            
-        action = [ (0,-1), (-1,0), (0,1), (1,0)]
-        while not q.empty():
-            cur_n = q.get()
+        parent[self.start] = None
+        action = [self.down(), self.left(), self.up(), self.right()]
+        while not node_stack.empty():
+            # Zabierz z kolejki element
+            cur_n = node_stack.get()
+            # zaznacz jako odwiedzony
             visited.add(cur_n)
             self.map.data[cur_n[0] + cur_n[1] * self.map.info.width] = 50
-            self.get_logger().info(f"cur_n:={cur_n}")
-            if cur_n == self.end:
+            # sprawdz czy nie jest docelowym
+            if self.find_goal(cur_n):
                 break
 
-            for u in action:
-                next_n = (cur_n[0]+u[0], cur_n[1]+u[1])
-                self.get_logger().info(f"next_n:={next_n}")
-                if next_n not in visited:
-                    if self.map.data[next_n[0] + next_n[1] * self.map.info.width] < 50:
-                        if next_n not in list(q.queue):
-                            parent[next_n] = cur_n
-                            q.put(next_n)
+            neighbors = [(cur_n[0] + u[0], cur_n[1] + u[1]) for u in action]
+            for next_n in neighbors:
+                if self.is_valid(next_n) and \
+                        next_n not in visited:
+                    if self.map.data[next_n[0] + next_n[1]
+                                     * self.map.info.width] < 50:
+                        parent[next_n] = cur_n
+                        node_stack.put(next_n)
             self.publish_visited()
-        
+
         path = []
-        while cur_n != None:
+        while cur_n is not None:
             path.append(cur_n)
             cur_n = parent[cur_n]
         self.publish_path(reversed(path))
@@ -72,6 +76,7 @@ def main(args=None):
     bfs.publish_visited()
     time.sleep(1)
     bfs.search()
+
 
 if __name__ == '__main__':
     main()

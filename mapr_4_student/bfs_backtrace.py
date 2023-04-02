@@ -40,6 +40,9 @@ class BFS(GridMap):
         while not node_stack.empty():
             # Zabierz z kolejki element
             cur_n = node_stack.get()
+            
+            if cur_n in visited:
+                continue
             # zaznacz jako odwiedzony
             visited.add(cur_n)
             self.map.data[cur_n[0] + cur_n[1] * self.map.info.width] = 50
@@ -61,7 +64,7 @@ class BFS(GridMap):
         while cur_n is not None:
             path.append(cur_n)
             cur_n = parent[cur_n]
-        self.publish_path(reversed(path))
+        self.publish_path(path)
 
 
 def main(args=None):

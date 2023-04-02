@@ -61,8 +61,8 @@ class DFS(GridMap):
                 node_stack.get()
 
             self.publish_visited()
-
-        self.publish_path(list(node_stack.queue))
+        # self.get_logger().info(node_stack.queue)
+        self.publish_path(node_stack.queue)
 
 
 def main(args=None):

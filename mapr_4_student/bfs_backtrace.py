@@ -40,7 +40,7 @@ class BFS(GridMap):
         while not node_stack.empty():
             # Zabierz z kolejki element
             cur_n = node_stack.get()
-            
+
             if cur_n in visited:
                 continue
             # zaznacz jako odwiedzony
@@ -61,10 +61,16 @@ class BFS(GridMap):
             self.publish_visited()
 
         path = []
+        cur_n = self.end
+        self.get_logger().info("Waiting for data...")
         while cur_n is not None:
             path.append(cur_n)
             cur_n = parent[cur_n]
+        path.reverse()
+        self.get_logger().info(path)
         self.publish_path(path)
+        self.get_logger().info(type(path))
+        
 
 
 def main(args=None):
